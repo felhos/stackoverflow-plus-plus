@@ -1,5 +1,7 @@
 package com.codecool.stackoverflowtw.dao;
 
-public interface QuestionsDAO {
-    void sayHi();
+import com.codecool.stackoverflowtw.dao.model.Question;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface QuestionsDAO extends JpaRepository<Question, Integer> {
 }
