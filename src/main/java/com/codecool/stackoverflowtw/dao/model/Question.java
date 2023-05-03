@@ -5,23 +5,25 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "question")
+@Table(name = "questions")
 public class Question {
 
     private String title;
     private String description;
     private LocalDateTime date;
     private int id;
+    private int userID;
 
 
-    public Question() {
-
-    }
-
-    public Question(String title, String description, LocalDateTime date) {
+    public Question(String title, String description, LocalDateTime date, int userID) {
         this.title = title;
         this.description=description;
         this.date=date;
+        this.userID = userID;
+    }
+
+    public Question() {
+
     }
 
     @Id
