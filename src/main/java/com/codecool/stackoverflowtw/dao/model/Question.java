@@ -57,6 +57,13 @@ public class Question {
     public void setDate(LocalDateTime date) {
         this.date = date;
     }
+    @Column(name = "user_id", nullable = false)
+    public int getUserID() {
+        return userID;
+    }
+    public void setUserID(int userID) {
+        this.userID = userID;
+    }
 
 
 

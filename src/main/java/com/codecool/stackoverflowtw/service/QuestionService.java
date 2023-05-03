@@ -39,13 +39,15 @@ public class QuestionService {
     };
 
     public boolean deleteQuestionById(int id) {
-        // TODO
+        if (questionsDAO.existsById(id)) {
+            questionsDAO.deleteById(id);
+            return true;
+        }
         return false;
     }
 
     public int addNewQuestion(NewQuestionDTO question) {
-        // TODO
-        int createdId = 0;
-        return createdId;
+        Question q =  questionsDAO.save(new Question(question.title(),question.description(), LocalDateTime.now(), question.userID()));
+        return q.getId();
     }
 }
