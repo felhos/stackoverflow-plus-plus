@@ -18,9 +18,15 @@ public class QuestionController {
         this.questionService = questionService;
     }
 
+//    @GetMapping("/all")
+//    public List<QuestionDTO> getAllQuestions() {
+//        return questionService.getAllQuestions("q.id");
+//    }
+
     @GetMapping("/all")
-    public List<QuestionDTO> getAllQuestions() {
-        return questionService.getAllQuestions();
+    public List<QuestionDTO> getAllQuestions(@RequestParam(defaultValue = "q.id") String orderby) {
+        System.out.println(orderby);
+        return questionService.getAllQuestions(orderby);
     }
 
     //@GetMapping("/{id}")
