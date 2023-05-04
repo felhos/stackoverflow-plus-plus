@@ -16,19 +16,22 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public interface QuestionsDAO extends JpaRepository<Question, Integer> {
-    @Modifying
     @Query(value = "SELECT q.id,q.title,q.body,q.date_created, u.id,u.username, COUNT(a) " +
             "FROM questions q " +
             "JOIN users u on u.id = q.user_id " +
             "LEFT JOIN answers a on q.id = a.question_id " +
             "GROUP BY q.id, q.title , q.body, q.date_created, u.id, u.username " +
-            "ORDER BY :column ", nativeQuery = true)
-    List<Object[]> findQuestionsWithAnswersCounts(@Param("column") String column);
+            "ORDER BY " +
+            "CASE WHEN :columnName = 'title' THEN CAST(q.title AS VARCHAR) " +
+            "     WHEN :columnName = 'date_created' THEN CAST(q.date_created AS VARCHAR) " +
+            "     WHEN :columnName = 'username' THEN CAST(u.username AS VARCHAR) " +
+            "     ELSE CAST(q.id AS VARCHAR) " + "END ASC " , nativeQuery = true)
+    List<Object[]> findQuestionsWithAnswersCounts(String columnName);
 
 
-    default List<QuestionDTO> findQuestionsWithAnswersCount(String column) {
-        System.out.println(column);
-        List<Object[]> results = findQuestionsWithAnswersCounts("q.id ASC");
+    default List<QuestionDTO> findQuestionsWithAnswersCount(String columnName) {
+        System.out.println(columnName);
+        List<Object[]> results = findQuestionsWithAnswersCounts(columnName );
         return results.stream().map(tuple -> new QuestionDTO(
                         (int) tuple[0],
                         (String) tuple[1],

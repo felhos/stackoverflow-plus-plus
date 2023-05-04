@@ -24,15 +24,15 @@ public class QuestionController {
 //    }
 
     @GetMapping("/all")
-    public List<QuestionDTO> getAllQuestions(@RequestParam(defaultValue = "q.id") String orderby) {
+    public List<QuestionDTO> getAllQuestions(@RequestParam(defaultValue = "title") String orderby) {
         System.out.println(orderby);
         return questionService.getAllQuestions(orderby);
     }
 
-    //@GetMapping("/{id}")
-    //public QuestionDTO getQuestionById(@PathVariable int id) {
-    //    return questionService.getQuestionById(id);
-    //}
+    @GetMapping("/{id}")
+    public QuestionDTO getQuestionById(@PathVariable int id) {
+        return questionService.getQuestionById(id);
+    }
 
     @PostMapping("/")
     public int addNewQuestion(@RequestBody NewQuestionDTO question) {

@@ -49,5 +49,6 @@ public class UserService {
         User u =  usersDAO.save(new User(user.username(),user.password(), user.role()));
         return u.getId();
     }
+
 }
 
