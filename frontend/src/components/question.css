@@ -1,0 +1,42 @@
+.question-wrapper {
+    background-color: #BCBBBB;
+    border-radius: 25px;
+    width: 50vw;
+}
+
+.title-bar {
+    background-color: #313539;
+    min-height: 80px;
+    max-height: 80px;
+    border-radius: 25px 25px 0px  0px;
+    padding-left: 25px;
+    padding-right: 25px;
+    display: flex;
+    align-items: center;
+}
+
+.title-bar > h3 {
+    color: white;
+    font-weight: 300;
+    font-size: 20px;
+}
+
+.question {
+    font-size: 16px;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+.details {
+    height: 30px;
+    min-height: 30px;
+    max-height: 30px;
+    color: #F2740D;
+    background-color: #313539;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 25px;
+    padding-right: 25px;
+    border-radius: 0px  0px 25px 25px;
+}
