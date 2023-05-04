@@ -22,21 +22,21 @@ public class QuestionService {
         this.questionsDAO = questionsDAO;
     }
 
-    public List<QuestionDTO> getAllQuestions() {
-        List<Question> listQuestions=questionsDAO.findAll();
-        List<QuestionDTO> listDTO=new ArrayList<>();
-        for(Question question:listQuestions){
-            listDTO.add(new QuestionDTO(question.getId(),question.getTitle(),question.getDescription(),question.getDate(), question.getUserID()));
-        }
-       return listDTO;
+    public List<QuestionDTO> getAllQuestions(String orderby) {
+        List<QuestionDTO> listQuestions = questionsDAO.findQuestionsWithAnswersCount(orderby);
+        //List<QuestionDTO> listDTO=new ArrayList<>();
+        //for(Question question:listQuestions){
+        //    listDTO.add(new QuestionDTO(question.getId(),question.getTitle(),question.getDescription(),question.getDate(), question.getUserID()));
+        //}
+       return listQuestions;
     }
 
-    public QuestionDTO getQuestionById(int id) {
-        Optional<Question> question = questionsDAO.findById(id);
-        if(!question.isPresent()) return null;
-        Question q = question.get();
-        return new QuestionDTO(q.getId(), q.getTitle(), q.getDescription(), q.getDate(), q.getUserID());
-    };
+    //public QuestionDTO getQuestionById(int id) {
+    //    Optional<Question> question = questionsDAO.findById(id);
+    //    if(!question.isPresent()) return null;
+    //    Question q = question.get();
+    //    return new QuestionDTO(q.getId(), q.getTitle(), q.getDescription(), q.getDate(), q.getUserID());
+    //};
 
     public boolean deleteQuestionById(int id) {
         if (questionsDAO.existsById(id)) {

@@ -23,10 +23,10 @@ public class QuestionController {
         return questionService.getAllQuestions();
     }
 
-    @GetMapping("/{id}")
-    public QuestionDTO getQuestionById(@PathVariable int id) {
-        return questionService.getQuestionById(id);
-    }
+    //@GetMapping("/{id}")
+    //public QuestionDTO getQuestionById(@PathVariable int id) {
+    //    return questionService.getQuestionById(id);
+    //}
 
     @PostMapping("/")
     public int addNewQuestion(@RequestBody NewQuestionDTO question) {
