@@ -16,16 +16,16 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public interface QuestionsDAO extends JpaRepository<Question, Integer> {
-    @Query(value = "SELECT q.id,q.title,q.body,q.date_created, u.id,u.username, COUNT(a) " +
+    @Query(value = "SELECT q.id,q.title,q.body,q.date_created, u.id,u.username, COUNT(a.*) count " +
             "FROM questions q " +
             "JOIN users u on u.id = q.user_id " +
             "LEFT JOIN answers a on q.id = a.question_id " +
             "GROUP BY q.id, q.title , q.body, q.date_created, u.id, u.username " +
             "ORDER BY " +
-            "CASE WHEN :columnName = 'title' THEN CAST(q.title AS VARCHAR) " +
-            "     WHEN :columnName = 'date_created' THEN CAST(q.date_created AS VARCHAR) " +
-            "     WHEN :columnName = 'username' THEN CAST(u.username AS VARCHAR) " +
-            "     ELSE CAST(q.id AS VARCHAR) " + "END ASC " , nativeQuery = true)
+            "CASE WHEN :columnName = 'title' THEN CAST(q.title AS VARCHAR) END ASC," +
+            "CASE WHEN :columnName = 'date_created' THEN CAST(q.date_created AS VARCHAR)" +
+            "     WHEN :columnName = 'count' THEN CAST(count(a.*) AS VARCHAR) " +
+            "     ELSE CAST(q.id AS VARCHAR) END DESC ", nativeQuery = true)
     List<Object[]> findQuestionsWithAnswersCounts(String columnName);
 
 
