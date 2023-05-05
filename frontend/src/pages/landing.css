@@ -1,0 +1,28 @@
+.questions {
+    display: grid;
+    grid-template-rows: auto;
+    grid-gap: 25px;
+    justify-content: center;
+}
+
+.sorting {
+    display: flex;
+    justify-content: space-between;
+    color: #F2740D;
+}
+
+.sorting > div> span{
+    color: #313539;
+}
+
+.sorting > div > input[type="button"] {
+    all: unset;
+}
+
+.sorting > div > input[type="button"]:hover {
+    cursor: pointer;
+}
+
+.selected {
+    font-weight: bold;
+}
